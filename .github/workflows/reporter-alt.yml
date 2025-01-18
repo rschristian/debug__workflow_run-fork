@@ -1,4 +1,4 @@
-name: Reporter
+name: Reporter Alt
 
 on:
   workflow_run:
@@ -8,8 +8,8 @@ on:
       - completed
 
 jobs:
-  reporter:
-    name: Reporter
+  reporter-alt:
+    name: Reporter Alt
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
