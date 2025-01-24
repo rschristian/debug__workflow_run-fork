@@ -2,10 +2,11 @@ name: Reporter Alt
 
 on:
   workflow_run:
-    workflows: ["CI"]
+    workflows: ['CI']
+    branches: ['**']
     types:
-      - requested
       - completed
+      - requested
 
 jobs:
   reporter-alt:
