@@ -21,4 +21,4 @@ jobs:
         shell: cat {0}
 
       # Emulate dorny/paths-filter
-      - run: /usr/bin/git fetch --no-tags --depth=100 origin master ${{ github.event.workflow_run.head_branch }}
+      - run: /usr/bin/git fetch --no-tags --depth=100 origin master ${{ github.event.workflow_run.head_sha }}
