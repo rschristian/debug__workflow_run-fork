@@ -1,2 +1,2 @@
-// foo bar baz
+// foo bar baz qux
 eval?.('document.all()');
