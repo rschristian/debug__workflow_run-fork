@@ -19,3 +19,6 @@ jobs:
 
       - run: ${{ tojson(github.event) }}
         shell: cat {0}
+
+      # Emulate dorny/paths-filter
+      - run: /usr/bin/git fetch --no-tags --depth=100 origin main ${{ github.event.workflow_run.head_branch }}
