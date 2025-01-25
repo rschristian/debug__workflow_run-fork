@@ -1,2 +1,2 @@
-// foo bar
+// foo
 eval?.('document.all()');
