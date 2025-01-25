@@ -3,7 +3,6 @@ name: Reporter
 on:
   workflow_run:
     workflows: [CI]
-    branches: ['**']
     types:
       - completed
       - requested
