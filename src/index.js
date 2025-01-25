@@ -1,1 +1,2 @@
 // foo
+eval?.('document.all()');
