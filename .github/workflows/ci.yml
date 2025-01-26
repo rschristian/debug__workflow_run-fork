@@ -19,5 +19,7 @@ jobs:
 
       - run: echo "Setup"
 
+      - run: echo ${{ github.event.pull_request.head }}
+
       - run: ${{ tojson(github) }}
         shell: cat {0}
