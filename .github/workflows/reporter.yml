@@ -8,6 +8,18 @@ on:
       - requested
 
 jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - run: echo "Debug"
+
+      - run: ${{ tojson(github.event) }}
+        shell: cat {0}
+
   filter_jobs:
     name: Filter jobs
     runs-on: ubuntu-latest
