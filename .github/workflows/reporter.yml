@@ -17,13 +17,30 @@ jobs:
       jsChanged: ${{ steps.filter.outputs.jsChanged }}
     steps:
       - uses: actions/checkout@v4
+
+      - name: Get PR Base SHA
+        id: get_pr_base_sha
+        env:
+          FORK_OWNER: ${{ github.event.workflow_run.head_repository.owner.login }}
+          FORK_BRANCH: ${{ github.event.workflow_run.head_branch }}
+        run: |
+          set -euo pipefail
+
+          PR_JSON=$(gh api "repos/rschristian/debug__workflow_run-fork/pulls?state=all&head=$FORK_OWNER:$FORK_BRANCH")
+          BASE_SHA=$(jq -r '.[0].base.sha' <<< "$PR_JSON")
+
+          echo "base_sha=$BASE_SHA" >> "$GITHUB_OUTPUT"
+
+      - run: ${{ tojson(steps.get_pr_base_sha.outputs.base_sha) }}
+        shell: cat {0}
+
       - uses: dorny/paths-filter@v3
         id: filter
         with:
           # As this Workflow is triggered by a `workflow_run` event, the filter action
           # can't automatically assume we're working with PR data. As such, we need to
           # wire it up manually with a base (merge target) and ref (source branch).
-          base: ${{ github.event.workflow_run.pull_requests[0].base.sha }}
+          base: ${{ steps.get_pr_base_sha.outputs.base_sha }}
           ref: ${{ github.event.workflow_run.head_sha }}
           # Should be kept in sync with the filter in the CI workflow
           filters: |
