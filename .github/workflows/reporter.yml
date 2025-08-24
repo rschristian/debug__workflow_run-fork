@@ -21,6 +21,7 @@ jobs:
       - name: Get PR Base SHA
         id: get_pr_base_sha
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FORK_OWNER: ${{ github.event.workflow_run.head_repository.owner.login }}
           FORK_BRANCH: ${{ github.event.workflow_run.head_branch }}
         run: |
